@@ -1,45 +1,46 @@
 'use client'
 
-import { useEffect } from 'react'
-import { useApp } from './providers'
+import { useEffect, useState } from 'react'
 import { Dashboard } from '@/components/dashboard/Dashboard'
 import { LoginPage } from '@/components/auth/LoginPage'
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner'
 
 export default function Home() {
-  const { user, isLoading, setLoading } = useApp()
+  const [user, setUser] = useState<any>(null)
+  const [isLoading, setIsLoading] = useState(true)
+  const [tradingData, setTradingData] = useState({
+    positions: [],
+    orders: [],
+    pnl: 0,
+    portfolioValue: 100000
+  })
+  const [isConnected, setIsConnected] = useState(false)
 
   useEffect(() => {
-    // Check for existing authentication
+    // Simulate loading and authentication check
     const checkAuth = async () => {
-      setLoading(true)
+      setIsLoading(true)
       try {
-        const token = localStorage.getItem('access_token')
-        if (token) {
-          // Validate token with backend
-          const response = await fetch('/api/v1/auth/me', {
-            headers: {
-              'Authorization': `Bearer ${token}`
-            }
-          })
-          
-          if (response.ok) {
-            const userData = await response.json()
-            // User is authenticated
-          } else {
-            localStorage.removeItem('access_token')
-          }
-        }
+        // Simulate API call
+        await new Promise(resolve => setTimeout(resolve, 1000))
+        
+        // For demo purposes, set a mock user
+        setUser({
+          id: '1',
+          name: 'Demo User',
+          email: 'demo@example.com',
+          isAuthenticated: true
+        })
+        setIsConnected(true)
       } catch (error) {
         console.error('Auth check failed:', error)
-        localStorage.removeItem('access_token')
       } finally {
-        setLoading(false)
+        setIsLoading(false)
       }
     }
 
     checkAuth()
-  }, [setLoading])
+  }, [])
 
   if (isLoading) {
     return (
@@ -53,5 +54,5 @@ export default function Home() {
     return <LoginPage />
   }
 
-  return <Dashboard />
+  return <Dashboard user={user} tradingData={tradingData} isConnected={isConnected} />
 }

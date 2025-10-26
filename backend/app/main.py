@@ -1,5 +1,5 @@
 """
-ALFA ALGO Trading System - Simple Version
+ALFA ALGO Trading System - Ultra Simple Version
 """
 
 from fastapi import FastAPI
@@ -8,7 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 # Create FastAPI application
 app = FastAPI(
     title="ALFA ALGO Trading System",
-    description="Algorithmic trading system with Zerodha integration",
+    description="Algorithmic trading system",
     version="1.0.0"
 )
 

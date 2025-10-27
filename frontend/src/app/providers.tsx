@@ -60,7 +60,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
   const connect = () => {
     if (socket?.connected) return
 
-    const newSocket = io(process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:8000', {
+    const newSocket = io(process.env.NEXT_PUBLIC_WS_URL || 'wss://latest-algo.onrender.com', {
       transports: ['websocket'],
       autoConnect: true,
     })

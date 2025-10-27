@@ -32,29 +32,40 @@ export default function Home() {
   })
 
   useEffect(() => {
-    // Simulate loading and authentication check
-    const checkAuth = async () => {
+    // Check backend health and load real data
+    const initializeApp = async () => {
       setIsLoading(true)
       try {
-        // Simulate API call
-        await new Promise(resolve => setTimeout(resolve, 1500))
-        
-        // For demo purposes, set a mock user
+        // Check backend health
+        const healthResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://latest-algo.onrender.com'}/health`)
+        if (healthResponse.ok) {
+          console.log('Backend is healthy')
+          setIsConnected(true)
+        }
+
+        // For demo purposes, set a mock user (replace with real auth later)
         setUser({
           id: '1',
           name: 'Demo User',
           email: 'demo@example.com',
           isAuthenticated: true
         })
-        setIsConnected(true)
       } catch (error) {
-        console.error('Auth check failed:', error)
+        console.error('Backend connection failed:', error)
+        // Still set user for demo purposes
+        setUser({
+          id: '1',
+          name: 'Demo User',
+          email: 'demo@example.com',
+          isAuthenticated: true
+        })
+        setIsConnected(false)
       } finally {
         setIsLoading(false)
       }
     }
 
-    checkAuth()
+    initializeApp()
   }, [])
 
   // Simulate real-time data updates

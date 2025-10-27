@@ -144,7 +144,7 @@ export function Dashboard({
   useEffect(() => {
     // Simulate real-time data updates
     const interval = setInterval(() => {
-      setRealTimeData(prev => ({
+      setRealTimeData((prev: any) => ({
         ...prev,
         pnl: prev.pnl + (Math.random() - 0.5) * 100,
         portfolioValue: prev.portfolioValue + (Math.random() - 0.5) * 50

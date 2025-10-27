@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: alfa-algo-backend
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python start.py
+    envVars:
+      - key: HOST
+        value: 0.0.0.0
+      - key: PORT
+        value: 8000
+      - key: DEBUG
+        value: false
+    healthCheckPath: /health

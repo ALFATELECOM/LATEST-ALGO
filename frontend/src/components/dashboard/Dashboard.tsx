@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { TradingChart } from './TradingChart'
 import { StrategyManager } from './StrategyManager'
 import { OrderBook } from './OrderBook'
 import { RiskMetrics } from './RiskMetrics'

@@ -779,3 +779,4 @@ const OptionsStrategies: React.FC<OptionsStrategiesProps> = ({
 };
 
 export default OptionsStrategies;
+

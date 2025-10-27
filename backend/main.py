@@ -1,35 +1,26 @@
+#!/usr/bin/env python3
 """
-ALFA ALGO Trading System - Simple Backend
+ALFA ALGO Trading System - Main Entry Point
 """
 
-from flask import Flask, jsonify
-from flask_cors import CORS
+import uvicorn
+import os
 
-app = Flask(__name__)
-CORS(app)
-
-@app.route('/')
-def root():
-    return jsonify({
-        "message": "ALFA ALGO Trading System is running!",
-        "version": "1.0.0",
-        "status": "healthy"
-    })
-
-@app.route('/health')
-def health():
-    return jsonify({"status": "healthy"})
-
-@app.route('/api/status')
-def api_status():
-    return jsonify({
-        "status": "API is working",
-        "endpoints": [
-            "/",
-            "/health", 
-            "/api/status"
-        ]
-    })
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000, debug=True)
+if __name__ == "__main__":
+    # Get configuration from environment variables
+    host = os.getenv("HOST", "0.0.0.0")
+    port = int(os.getenv("PORT", "8000"))
+    debug = os.getenv("DEBUG", "false").lower() == "true"
+    
+    print(f"Starting ALFA ALGO Trading System Backend...")
+    print(f"Server will run on: http://{host}:{port}")
+    print(f"API Documentation: http://{host}:{port}/docs")
+    
+    # Start the FastAPI server
+    uvicorn.run(
+        "app.main:app",
+        host=host,
+        port=port,
+        reload=debug,
+        log_level="info"
+    )

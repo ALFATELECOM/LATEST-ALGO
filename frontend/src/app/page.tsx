@@ -86,7 +86,6 @@ export default function Home() {
               display: 'inline-block',
               transition: 'all 0.3s ease'
             }}
-            onMouseOver="this.style.backgroundColor='#2563eb'"
           >
             📚 API Documentation
           </a>
@@ -102,7 +101,6 @@ export default function Home() {
               display: 'inline-block',
               transition: 'all 0.3s ease'
             }}
-            onMouseOver="this.style.backgroundColor='#059669'"
           >
             ❤️ Health Check
           </a>

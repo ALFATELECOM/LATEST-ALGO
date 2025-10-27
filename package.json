@@ -1,0 +1,33 @@
+{
+  "name": "alfa-algo-trading-system",
+  "version": "1.0.0",
+  "description": "ALFA ALGO Trading System - Full Stack Application",
+  "private": true,
+  "workspaces": [
+    "frontend"
+  ],
+  "scripts": {
+    "dev": "cd frontend && npm run dev",
+    "build": "cd frontend && npm run build",
+    "start": "cd frontend && npm start",
+    "install:frontend": "cd frontend && npm install",
+    "install:backend": "cd backend && pip install -r requirements.txt"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ALFATELECOM/LATEST-ALGO.git"
+  },
+  "keywords": [
+    "trading",
+    "algorithmic-trading",
+    "options",
+    "nextjs",
+    "fastapi",
+    "react"
+  ],
+  "author": "ALFA ALGO Team",
+  "license": "Private"
+}

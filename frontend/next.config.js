@@ -7,14 +7,6 @@ const nextConfig = {
   images: {
     domains: ['localhost', 'latest-algo.onrender.com'],
   },
-  async rewrites() {
-    return [
-      {
-        source: '/api/:path*',
-        destination: `${process.env.NEXT_PUBLIC_API_URL}/api/:path*`,
-      },
-    ];
-  },
   webpack: (config) => {
     config.resolve.fallback = {
       ...config.resolve.fallback,
@@ -23,12 +15,6 @@ const nextConfig = {
       tls: false,
     };
     return config;
-  },
-  // Ensure proper build output
-  output: 'standalone',
-  // Disable serverless functions that might cause issues
-  experimental: {
-    serverComponentsExternalPackages: [],
   },
 };
 

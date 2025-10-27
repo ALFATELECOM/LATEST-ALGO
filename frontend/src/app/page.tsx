@@ -1,128 +1,122 @@
-'use client'
-
-import { useEffect, useState } from 'react'
-import { Dashboard } from '@/components/dashboard/Dashboard'
-import { LoginPage } from '@/components/auth/LoginPage'
-import { LoadingSpinner } from '@/components/ui/LoadingSpinner'
-
 export default function Home() {
-  const [user, setUser] = useState<any>(null)
-  const [isLoading, setIsLoading] = useState(true)
-  const [tradingData, setTradingData] = useState({
-    positions: [
-      { symbol: 'RELIANCE', quantity: 10, price: 2500, pnl: 1500 },
-      { symbol: 'TCS', quantity: 5, price: 3500, pnl: 1000 }
-    ],
-    orders: [
-      { symbol: 'INFY', type: 'BUY', quantity: 20, status: 'COMPLETE' },
-      { symbol: 'HDFC', type: 'SELL', quantity: 15, status: 'PENDING' }
-    ],
-    pnl: 2500,
-    portfolioValue: 100000
-  })
-  const [isConnected, setIsConnected] = useState(false)
-  const [strategies, setStrategies] = useState([
-    { name: 'RSI Strategy', status: 'ACTIVE', pnl: 1200 },
-    { name: 'MACD Strategy', status: 'ACTIVE', pnl: 800 },
-    { name: 'Bollinger Bands', status: 'INACTIVE', pnl: 0 }
-  ])
-  const [marketData, setMarketData] = useState({
-    nifty: { price: 19500, change: 150, change_percent: 0.78 },
-    sensex: { price: 65000, change: 200, change_percent: 0.31 }
-  })
+  return (
+    <div style={{ 
+      padding: '40px', 
+      fontFamily: 'Arial, sans-serif',
+      maxWidth: '1200px',
+      margin: '0 auto',
+      textAlign: 'center',
+      minHeight: '100vh',
+      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      color: 'white'
+    }}>
+      <h1 style={{ 
+        fontSize: '3rem', 
+        marginBottom: '20px',
+        textShadow: '2px 2px 4px rgba(0,0,0,0.3)'
+      }}>
+        🚀 ALFA ALGO Trading System
+      </h1>
+      
+      <div style={{ 
+        backgroundColor: 'rgba(255,255,255,0.1)', 
+        padding: '30px', 
+        borderRadius: '15px',
+        marginBottom: '30px',
+        backdropFilter: 'blur(10px)'
+      }}>
+        <h2 style={{ fontSize: '2rem', marginBottom: '15px' }}>✅ Deployment Successful!</h2>
+        <p style={{ fontSize: '1.2rem', marginBottom: '20px' }}>
+          Your advanced algorithmic trading platform is now live and running.
+        </p>
+      </div>
 
-  useEffect(() => {
-    // Check backend health and load real data
-    const initializeApp = async () => {
-      setIsLoading(true)
-      try {
-        // Check backend health
-        const healthResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://latest-algo.onrender.com'}/health`)
-        if (healthResponse.ok) {
-          console.log('Backend is healthy')
-          setIsConnected(true)
-        }
+      <div style={{ 
+        display: 'grid', 
+        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
+        gap: '20px',
+        marginBottom: '30px'
+      }}>
+        <div style={{ 
+          backgroundColor: 'rgba(255,255,255,0.1)', 
+          padding: '20px', 
+          borderRadius: '10px',
+          backdropFilter: 'blur(10px)'
+        }}>
+          <h3 style={{ color: '#4ade80', marginBottom: '15px' }}>🔗 Backend Status</h3>
+          <p>API: <a href="https://latest-algo.onrender.com" target="_blank" style={{ color: '#60a5fa' }}>https://latest-algo.onrender.com</a></p>
+          <p>Health: <a href="https://latest-algo.onrender.com/health" target="_blank" style={{ color: '#60a5fa' }}>Check Status</a></p>
+        </div>
 
-        // For demo purposes, set a mock user (replace with real auth later)
-        setUser({
-          id: '1',
-          name: 'Demo User',
-          email: 'demo@example.com',
-          isAuthenticated: true
-        })
-      } catch (error) {
-        console.error('Backend connection failed:', error)
-        // Still set user for demo purposes
-        setUser({
-          id: '1',
-          name: 'Demo User',
-          email: 'demo@example.com',
-          isAuthenticated: true
-        })
-        setIsConnected(false)
-      } finally {
-        setIsLoading(false)
-      }
-    }
-
-    initializeApp()
-  }, [])
-
-  // Simulate real-time data updates
-  useEffect(() => {
-    if (!isConnected) return
-
-    const interval = setInterval(() => {
-      setTradingData(prev => ({
-        ...prev,
-        pnl: prev.pnl + (Math.random() - 0.5) * 200,
-        portfolioValue: prev.portfolioValue + (Math.random() - 0.5) * 100,
-        positions: prev.positions.map(pos => ({
-          ...pos,
-          pnl: pos.pnl + (Math.random() - 0.5) * 100
-        }))
-      }))
-
-      setMarketData(prev => ({
-        nifty: {
-          ...prev.nifty,
-          price: prev.nifty.price + (Math.random() - 0.5) * 50,
-          change: (Math.random() - 0.5) * 100
-        },
-        sensex: {
-          ...prev.sensex,
-          price: prev.sensex.price + (Math.random() - 0.5) * 100,
-          change: (Math.random() - 0.5) * 200
-        }
-      }))
-    }, 3000)
-
-    return () => clearInterval(interval)
-  }, [isConnected])
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
-        <div className="text-center">
-          <LoadingSpinner size="lg" />
-          <p className="mt-4 text-lg text-gray-600">Loading ALFA ALGO Trading System...</p>
-          <p className="mt-2 text-sm text-gray-500">Initializing trading platform</p>
+        <div style={{ 
+          backgroundColor: 'rgba(255,255,255,0.1)', 
+          padding: '20px', 
+          borderRadius: '10px',
+          backdropFilter: 'blur(10px)'
+        }}>
+          <h3 style={{ color: '#fbbf24', marginBottom: '15px' }}>🎯 Features</h3>
+          <ul style={{ textAlign: 'left', listStyle: 'none', padding: 0 }}>
+            <li>📊 Real-time Portfolio Dashboard</li>
+            <li>📈 Options Trading Strategies</li>
+            <li>⚠️ Risk Management Tools</li>
+            <li>📡 Market Data Integration</li>
+            <li>🔄 WebSocket Updates</li>
+          </ul>
         </div>
       </div>
-    )
-  }
 
-  if (!user?.isAuthenticated) {
-    return <LoginPage />
-  }
+      <div style={{ 
+        backgroundColor: 'rgba(255,255,255,0.1)', 
+        padding: '20px', 
+        borderRadius: '10px',
+        marginBottom: '30px',
+        backdropFilter: 'blur(10px)'
+      }}>
+        <h3 style={{ color: '#a78bfa', marginBottom: '15px' }}>🚀 Quick Actions</h3>
+        <div style={{ display: 'flex', gap: '15px', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <a 
+            href="https://latest-algo.onrender.com/docs" 
+            target="_blank"
+            style={{ 
+              backgroundColor: '#3b82f6', 
+              color: 'white', 
+              padding: '12px 24px', 
+              textDecoration: 'none', 
+              borderRadius: '8px',
+              display: 'inline-block',
+              transition: 'all 0.3s ease'
+            }}
+            onMouseOver="this.style.backgroundColor='#2563eb'"
+          >
+            📚 API Documentation
+          </a>
+          <a 
+            href="https://latest-algo.onrender.com/health" 
+            target="_blank"
+            style={{ 
+              backgroundColor: '#10b981', 
+              color: 'white', 
+              padding: '12px 24px', 
+              textDecoration: 'none', 
+              borderRadius: '8px',
+              display: 'inline-block',
+              transition: 'all 0.3s ease'
+            }}
+            onMouseOver="this.style.backgroundColor='#059669'"
+          >
+            ❤️ Health Check
+          </a>
+        </div>
+      </div>
 
-  return (
-    <Dashboard 
-      user={user} 
-      tradingData={tradingData} 
-      isConnected={isConnected}
-      strategies={strategies}
-      marketData={marketData}
-    />
+      <div style={{ 
+        fontSize: '0.9rem', 
+        opacity: 0.8,
+        marginTop: '40px'
+      }}>
+        <p>Built with Next.js, React, TypeScript, and FastAPI</p>
+        <p>Deployed on Vercel + Render</p>
+      </div>
+    </div>
   )
 }
